@@ -37,6 +37,7 @@ for _ in range(N):
    
 com = []
 for i in range(N):
+    # 1~4개 짜리 조합 append 
     com.append(combinations(matters, i+1))
     
 ans = 1_000_000_000
@@ -51,4 +52,5 @@ for i in com:
             B += e[1]
         
         ans = min(ans, abs(S-B))
+        
 print(ans)
