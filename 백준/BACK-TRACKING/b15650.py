@@ -1,4 +1,6 @@
 # 백준 15650 N과 M (2)
+# 고른 수열은 오름차순이어야 한다. 
+# 중복하는 수열을 여러 번 출력하면 안된다. 
 
 from itertools import combinations
 
