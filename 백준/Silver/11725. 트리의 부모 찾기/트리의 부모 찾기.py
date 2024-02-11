@@ -1,23 +1,23 @@
-import sys
+import sys 
 sys.setrecursionlimit(10**9) 
 
-N = int(input())
+N = int(sys.stdin.readline().split())
 
-graph = [[] for _ in range(N + 1)]
-visited = [0] * (N + 1)
+adj = [[] for _ in range(N+1)]
+chk = [0] * (N+1)
 
-for _ in range(N - 1):
-	a, b = map(int, sys.stdin.readline().split())
-	graph[a].append(b)
-	graph[b].append(a)
- 
-def dfs(v):
-    for i in graph[v]:
-        if not visited[i]:
-            visited[i] = v
-            dfs(i)
-
+for _ in range(N-1):
+    a, b = map(int, sys.stdin.readline().split())
+    adj[a].append(b)
+    adj[b].append(a)
+    
+def dfs(now):
+    for nxt in adj[now]:
+        if not chk[nxt]:
+            chk[nxt] = now 
+            dfs(nxt)
+            
 dfs(1)
 
-for i in range(2, N + 1):
-	print(visited[i])
+for i in range(2, N+1):
+    print(chk[i])
