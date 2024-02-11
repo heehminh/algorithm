@@ -1,29 +1,21 @@
-# 바이러스
-import sys 
-input = sys.stdin.readline
-
 N = int(input())
 M = int(input())
 
-adj = [[0] * (N+1) for _ in range(N+1)]
+adj = [[0] * N for _ in range(N)]
+
 for _ in range(M):
-    x, y = map(int, input().split())
-    adj[x][y] = adj[y][x] = 1 
-    
-ans = 0 
-chk = [False] * (N+1)
+    a, b = map(int, input().split())
+    adj[a-1][b-1] = adj[b-1][a-1] = 1 
+
+chk = [False] * N
 
 def dfs(now):
-    chk[now] = 1 
+    chk[now] = True 
     
-    for nxt in range(1, N+1):
-        if adj[now][nxt] and not chk[nxt]:
+    for nxt in range(N):
+        if not chk[nxt] and adj[now][nxt]:
             dfs(nxt)
 
-for i in range(1, N+1):
-    if not chk[i] and i == 1:
-        ans += 1 
-        chk[i] = 1 
-        dfs(i)
-    
-print(chk.count(1) -1)
+dfs(0)
+
+print(chk.count(True) - 1)
