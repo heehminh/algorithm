@@ -1,7 +1,7 @@
 import sys 
 sys.setrecursionlimit(10**9) 
 
-N = int(sys.stdin.readline().split())
+N = int(sys.stdin.readline())
 
 adj = [[] for _ in range(N+1)]
 chk = [0] * (N+1)
