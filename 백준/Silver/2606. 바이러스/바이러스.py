@@ -1,21 +1,26 @@
+# 바이러스 
+
 N = int(input())
 M = int(input())
 
-adj = [[0] * N for _ in range(N)]
+adj = [[0] * (N+1) for _ in range(N+1)]
 
 for _ in range(M):
-    a, b = map(int, input().split())
-    adj[a-1][b-1] = adj[b-1][a-1] = 1 
+    u, v = map(int, input().split())
+    # 무향그래프
+    adj[u][v] = adj[v][u] = 1 
 
-chk = [False] * N
+ans = 0
+chk = [0] * (N+1)
 
 def dfs(now):
-    chk[now] = True 
+    global ans
+    chk[now] = 1 
     
-    for nxt in range(N):
-        if not chk[nxt] and adj[now][nxt]:
+    for nxt in range(N+1):
+        if adj[now][nxt] == 1 and not chk[nxt]:
+            ans += 1 
             dfs(nxt)
-
-dfs(0)
-
-print(chk.count(True) - 1)
+    
+dfs(1)
+print(ans)
