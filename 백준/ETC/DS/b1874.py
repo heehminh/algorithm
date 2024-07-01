@@ -24,6 +24,7 @@ for _ in range(int(sys.stdin.readline())):
     # NO 
     else:
         isStack = False
+        break
 
 if isStack:
     print("\n".join(result))

@@ -4,6 +4,7 @@ from collections import deque
 
 dq = deque()
 N = int(sys.stdin.readline())
+
 for _ in range(N):
     method = sys.stdin.readline().split()
     

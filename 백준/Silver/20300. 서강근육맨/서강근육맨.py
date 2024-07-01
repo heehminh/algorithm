@@ -4,13 +4,13 @@ arr = sorted(arr)
 result = []
 
 if (N%2 == 0):
-    # 짝수 
-    j = N-1
-    
-else:
     # 홀수 
     j = N-2
     result.append(arr[-1])
+    
+else:
+    # 짝수 
+    j = N-1
 
 i = 0 
 while i<j:
