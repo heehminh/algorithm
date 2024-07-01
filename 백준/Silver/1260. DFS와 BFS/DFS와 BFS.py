@@ -1,47 +1,50 @@
+# DFS와 BFS 
 from collections import deque
 
-# 정점의 개수, 간선의 개수, 탐색을 시작할 정점의 번호 
 N, M, V = map(int, input().split())
 
-adj = [[0] * N for _ in range(N)]
+# 인접행렬 
+adj = [[0] * (N+1) for _ in range(N+1)]
 
+# 간선 체크
 for _ in range(M):
     a, b = map(int, input().split())
-    adj[a-1][b-1] = adj[b-1][a-1] = 1 
-   
-chk_dfs = [False] * N 
-
-dfs_result = []
-
-def dfs(now):
-    chk_dfs[now] = True 
-    dfs_result.append(now+1)
-
-    for nxt in range(N):
-        if adj[now][nxt] and not chk_dfs[nxt]:
-            dfs(nxt)
+    adj[a][b] = adj[b][a] = 1 
     
-dfs(V-1)
-print(*dfs_result)
+# 정답 배열 
+dfs_ans = []
+bfs_ans = []
 
-chk_bfs = [False] * N 
-bfs_result = []
+# 체크 배열 
+dfs_chk = [0] * (N+1)
+bfs_chk = [0] * (N+1)
 
-dq = deque()
+# dfs, 재귀 
+def dfs(now):
+    dfs_chk[now] = 1 
+    dfs_ans.append(now)
+    
+    for nxt in range(N+1):
+        if adj[now][nxt] == 1 and not dfs_chk[nxt]:
+            dfs(nxt)
 
+dfs(V)
+print(*dfs_ans)
+
+# bfs, 큐 
 def bfs(now):
     dq = deque()
-    chk_bfs[now] = True 
+    bfs_chk[now] = 1
     dq.append(now)
-
+    
     while dq:
         now = dq.popleft()
-        bfs_result.append(now+1)
+        bfs_ans.append(now)
         
-        for nxt in range(N):
-            if adj[now][nxt] and not chk_bfs[nxt]:
+        for nxt in range(N+1):
+            if adj[now][nxt] == 1 and not bfs_chk[nxt]:
                 dq.append(nxt)
-                chk_bfs[nxt] = True 
-                
-bfs(V-1)
-print(*bfs_result)
+                bfs_chk[nxt] = 1
+
+bfs(V)
+print(*bfs_ans)
