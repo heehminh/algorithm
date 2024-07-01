@@ -1,31 +1,30 @@
-# 백준 11724 연결 요소의 개수
-# 인접행렬을 쓸 지, 인접리스트를 쓸 지
-# N, M: 정점, 간선 (1 <= N <= 1000, 0 <= M <= N*(N-1)/2)
-# NC2: N개 중에 서로 다른 정점 2개를 뽑느 경우의 수
-# => 인접행렬을 사용한다 
+# 연결 요소의 개수 
+import sys
+sys.setrecursionlimit(10**6)
+input = sys.stdin.readline
 
-import sys 
+N, M = map(int, input().split())
 
-N, M = map(int, sys.stdin.readline().split())
-adj = [[0] * N for _ in range(N)]
+adj = [[0] * (N+1) for _ in range(N+1)]
 
 for _ in range(M):
-    a, b = map(lambda x: x-1, map(int, sys.stdin.readline().split()))
-    adj[a][b] = adj[b][a] = 1
-
-chk = [False] * N
+    u, v = map(int, input().split())
+    # 무향그래프 
+    adj[u][v] = adj[v][u] = 1 
+    
+chk = [0] * (N+1)
 ans = 0 
 
 def dfs(now):
-    for nxt in range(N):
-        if adj[now][nxt] and not chk[nxt]:
-            chk[nxt] = True 
+    chk[now] = 1  # 체크 
+    
+    for nxt in range(1, N+1):
+        if adj[now][nxt] == 1 and not chk[nxt]:
             dfs(nxt)
-
-for i in range(N):
+    
+for i in range(1, N+1):
     if not chk[i]:
-        ans += 1
-        chk[i] = True
+        ans += 1 
         dfs(i)
         
 print(ans)
