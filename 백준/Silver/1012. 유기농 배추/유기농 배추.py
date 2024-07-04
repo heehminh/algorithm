@@ -1,52 +1,55 @@
-# 백준 1012 유기농 배추 
-# M: 배추밭의 가로길이
-# N: 배추밭의 세로길이
-# K: 배추가 심어져있는 위치의 개수
-# X, Y (최대 M, N)
+# 유기농 배추 
+# 연결요소의 개수 
 
-import sys 
+# 체크 배열 사용 X 
+# 방문한 노드는 방문 처리 
+
 from collections import deque
 
-dx = (-1, 1, 0, 0)
-dy = (0, 0, -1, 1)
+T = int(input())
 
-def is_valid_coord(x, y):
-    return 0 <= x < N and 0 <= y < M
-
-def bfs(x, y):
-    dq = deque()
-    dq.append((x,y))
-    
-    while dq: 
-        x, y = dq.popleft()
-        
-        for k in range(4):
-            nx = x + dx[k]
-            ny = y + dy[k]
-            
-            if is_valid_coord(nx, ny) and board[nx][ny]:
-                dq.append((nx, ny))
-                board[nx][ny] = 0 # 방문
-    return             
-                
-T = int(sys.stdin.readline())
 for _ in range(T):
-    M, N, K = map(int, sys.stdin.readline().split())
-    board = [[0]*M for _ in range(N)]
+
+    N, M, K = map(int, input().split()) # 가로, 세로, 배추의 개수
+
+    board = [[0] * N for _ in range(M)] # board[x][y]
 
     for _ in range(K):
-        x, y = map(int, sys.stdin.readline().split())
-        board[y][x] = 1 
-    
+        x, y = map(int, input().split())
+        board[y][x] = 1
+        
     ans = 0 
-    for i in range(N):
-        for j in range(M):
-            if board[i][j]:
-                bfs(i, j)
+
+    dy = (0, 1, 0, -1)
+    dx = (1, 0, -1, 0)
+
+    def is_valid_coord(y, x):
+        return 0 <= y < M and 0 <= x < N
+
+    def bfs(y, x):
+        dq = deque()
+        dq.append((y, x))
+        
+        while dq:
+            y, x = dq.popleft()
+            
+            if y == M-1 and x == N-1:
+                return 
+            
+            for k in range(4):
+                ny = y + dy[k]
+                nx = x + dx[k]
+                
+                if is_valid_coord(ny, nx) and board[ny][nx] == 1:
+                    dq.append((ny, nx))
+                    # 칸 방문 처리 
+                    board[ny][nx] = 0 
+        return
+
+    for x in range(N):
+        for y in range(M):
+            if board[y][x] == 1:
+                bfs(y, x)
                 ans += 1 
-
+                
     print(ans)
-    
-
-
-
