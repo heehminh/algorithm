@@ -25,20 +25,20 @@ for _ in range(T):
             for i in range(N):
                 for j in range(N):
                     # 1. 주 대각선 -> 가운데 열 
-                    if i == j:
-                        ans[i][j] = board[mid][j]
+                    if j == mid:
+                        ans[i][j] = board[i][i]
                     
                     # 2. 가운데 열 -> 부 대각선
-                    elif i == mid:
-                        ans[i][j] = board[N-j-1][j]
-                        
-                    # 3. 부 대각선 -> 가운데 행
                     elif i+j == N-1:
                         ans[i][j] = board[i][mid]
+                        
+                    # 3. 부 대각선 -> 가운데 행
+                    elif i == mid:
+                        ans[i][j] = board[N-j-1][j]
                     
                     # 4. 가운데 행 -> 주 대각선 
-                    elif j == mid:
-                        ans[i][j] = board[i][i]
+                    elif i == j:
+                        ans[i][j] = board[mid][j]
                     
                     else:
                         ans[i][j] = board[i][j]
