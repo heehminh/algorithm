@@ -1,28 +1,33 @@
 # 촌수계산
-# dfs 
 
-N = int(input()) # 전체 사람의 수 
-A, B = map(int, input().split())
-M = int(input()) 
-adj = [[0] * (N+1) for _ in range(N+1)]
+N = int(input())
+x, y = map(int, input().split())
+M = int(input())
+
+adj = [[0]*(N+1) for _ in range(N+1)]
 
 for _ in range(M):
-    x, y = map(int, input().split())
-    adj[x][y] = adj[y][x] = 1 
-
-result = []
+    u, v = map(int, input().split())
+    adj[u][v] = adj[v][u] = 1
+    
 chk = [False] * (N+1)
+res = []
 
 def dfs(now, ans):
-    ans += 1 
-    chk[now] = 1 
+    chk[now] = True 
     
-    if now == B:
-        result.append(ans)
+    if now == y:
+        res.append(ans+1)
+        return 
     
-    for nxt in range(1, N+1):
+    for nxt in range(N+1):
         if adj[now][nxt] and not chk[nxt]:
-            dfs(nxt, ans)
-        
-dfs(A, 0)
-print(result[0]-1 if len(result)!=0 else -1)
+            chk[nxt] = True 
+            dfs(nxt, ans+1)
+    
+dfs(x, 0)
+
+if res:
+    print(res.pop()-1)
+else:
+    print(-1)
