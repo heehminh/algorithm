@@ -1,52 +1,46 @@
-'''
-물에 잠기지 않는 안전한 영역의 최대 개수, 최대 높이 값에 따른 
-
-1. 최대 높이가 4일 때 구해보기 
-2. for 문 돌려서 값 array에 넣고 return max 
-'''
+# 안전 영역 
+# BFS
+# N 이상을 1로, N 이하를 0으로 생각 
+# 연결요소의 !최대! 개수 
 
 from collections import deque
 
 N = int(input())
-
-adj = [[0] * N for _ in range(N)]
-
-for i in range(N):
-    adj[i] = list(map(int, input().split()))
-
-def is_valid_coord(y, x):
-    return 0 <= y < N and 0 <= x < N
+board = [list(map(int, input().split())) for _ in range(N)]
 
 dy = (0, 1, 0, -1)
 dx = (1, 0, -1, 0)
 
-def bfs(x, y): 
+def is_valid_coord(x, y):
+    return 0 <= x < N and 0 <= y < N
+
+def bfs(x, y):
     dq = deque()
     dq.append((x, y))
     
     while dq:
         x, y = dq.popleft()
-
+        
         for k in range(4):
             nx = x + dx[k]
             ny = y + dy[k]
             
-            if is_valid_coord(ny, nx) and not chk[nx][ny] and adj[nx][ny] > num:
-                chk[nx][ny] = True   
-                dq.append((nx, ny))           
+            if is_valid_coord(nx, ny) and not chk[nx][ny] and board[nx][ny] > height:
+                chk[nx][ny] = True 
+                dq.append((nx, ny))
 
-res = 1
+res = 1 # 최댓값으로 업데이트
 
-for num in range(1, 101): 
-    ans = 0
-    chk = [[False] * N for _ in range(N)]
+for height in range(1, 101): # N: 1~N까지 높이
+    ans = 0 # 연결요소의 개수
+    chk = [[False] * (N) for _ in range(N)]
     
     for i in range(N):
         for j in range(N):
-            if not chk[i][j] and adj[i][j] > num:
-                ans += 1
-                bfs(i, j)
-                       
-    res = max(ans, res)
-            
+            if not chk[i][j] and board[i][j] > height:
+                ans += 1 
+                bfs(i, j) # x, y
+    
+    res = max(res, ans)
+
 print(res)
