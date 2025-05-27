@@ -1,27 +1,19 @@
-# 패션왕 신해빈 
+T = int(input())
 
-# 테스트 케이스 
-# n: 해빈이가 가진 의상의 수 
-# 의상의 이름, 의상의 종류 
+for _ in range(T):
+    N = int(input())
+    dict = {}
+    ans = 1
 
-testCase = int(input())
-for _ in range(testCase):
-    n = int(input())
+    for _ in range(N):
+        name, type = map(str, input().split())
+        dict[name] = type 
     
-    m = {}
-    for i in range(n):
-        ans = n
-        costume = list(map(str, input().split()))
-        if (costume[1] in m.keys()):
-            m[costume[1]] += 1 
-        else:
-            m[costume[1]] = 2
+    unique_type = set(dict.values())
     
-    ans = 1 
-    for i in m.values():
-        ans *= i 
+    for type in unique_type:
+        cnt = list(dict.values()).count(type)
+        ans *= (cnt+1)
+    
     print(ans-1)
-        
-        
-        
-        
+    # 종류별로+1 씩 모두 곱한뒤 -1 (알몸)
