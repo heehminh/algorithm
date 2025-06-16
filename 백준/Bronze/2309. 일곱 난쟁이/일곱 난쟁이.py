@@ -1,11 +1,11 @@
-from itertools import combinations
-
+# combinations 안쓰고 풀기 
 arr = [int(input()) for _ in range(9)]
+arr.sort()
 
-combi = list(combinations(arr, 7)) 
-
-for i in combi:
-    if sum(i) == 100:
-        for height in sorted(list(i)):
-            print(height)
-        break
+for i in range(8): 
+    for j in range(i+1, 9):
+        if sum(arr) - arr[i] - arr[j] == 100:
+            for k in range(9):
+                if k != i and k != j:
+                    print(arr[k])
+            exit()
