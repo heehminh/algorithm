@@ -1,19 +1,9 @@
-def name_to_num(name):
-    num = 0 
-    if name == 'date':
-        num = 1 
-    elif name == 'maximum':
-        num = 2 
-    elif name == 'remain':
-        num = 3 
-
-    return num 
-
 def solution(data, ext, val_ext, sort_by):
     answer = []
+    dict = {'code':0, 'date':1, 'maximum':2, 'remain':3}
     
-    ext_num = name_to_num(ext)
-    sort_num = name_to_num(sort_by)
+    ext_num = dict[ext]
+    sort_num = dict[sort_by]
     
     for item in data:
         if item[ext_num] < val_ext:
