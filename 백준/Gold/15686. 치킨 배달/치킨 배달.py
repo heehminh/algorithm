@@ -4,7 +4,7 @@
 from itertools import combinations
 
 N, M = map(int, input().split())
-board = [input().split(" ") for _ in range(N)]
+board = [input().split() for _ in range(N)]
 
 chicken = [] # [1,2], [2,2], [4,4]
 
