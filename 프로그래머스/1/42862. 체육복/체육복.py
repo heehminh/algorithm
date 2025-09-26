@@ -10,15 +10,16 @@ def solution(n, lost, reserve):
         arr[r-1] += 1 
         
     for i in range(n):
-        if arr[i] == 0:
-            if i > 0 and arr[i-1] == 2:
-                arr[i-1] -= 1 
-                arr[i] += 1 
-            
-            elif i < n-1 and arr[i+1] == 2:
-                arr[i+1] -= 1 
-                arr[i] += 1 
+        if i > 0 and arr[i] == 2:
+            if arr[i-1] == 0:
+                arr[i-1] += 1 
+                arr[i] -= 1 
                     
+        elif i < n-1 and arr[i] == 2:
+            if arr[i+1] == 0:
+                arr[i+1] += 1
+                arr[i] -= 1 
+                
     for c in arr:
         if c > 0:
             answer += 1 
