@@ -1,16 +1,15 @@
 N = int(input())
-cache = [0] * 1001
 
-cache[1] = 1
-cache[2] = 2 
+if N == 1:
+    print(1)
+    exit()
 
-def dp(n):
-    if cache[n] > 0:
-        return cache[n]
+dp = [0] * (N+1)
 
-    cache[n] = dp(n-1) + dp(n-2)
-    cache[n] %= 10007
-    
-    return cache[n]
+dp[1] = 1
+dp[2] = 2
 
-print(dp(N))
+for i in range(3, N+1):
+    dp[i] = dp[i-2]+ dp[i-1]
+
+print(dp[N]%10007)
