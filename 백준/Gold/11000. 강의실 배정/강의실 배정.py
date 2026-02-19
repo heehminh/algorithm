@@ -5,7 +5,7 @@ input = sys.stdin.readline
 N = int(input())
 arr = [list(map(int, input().split())) for _ in range(N)]
 
-arr.sort(key=lambda x: (x[0], x[1]))
+arr.sort()
 min_h = [] # 종료시간
 
 cnt = 1 
