@@ -1,14 +1,16 @@
-import sys
+import sys 
 import heapq
 
-pq = [] # 절댓값, 값을 넣고 출력할때는 값만 출력 
-N = int(sys.stdin.readline())
+input = sys.stdin.readline
+h = []
+
+N = int(input())
 
 for _ in range(N):
-    num = int(sys.stdin.readline())
+    x = int(input())
     
-    if (num == 0):
-        if pq: print(heapq.heappop(pq)[1])
-        else: print(0)
-    else: 
-        heapq.heappush(pq, (abs(num), num))
+    if x == 0:
+        print(heapq.heappop(h)[1] if h else 0)
+    
+    else:
+        heapq.heappush(h, [abs(x), x])
