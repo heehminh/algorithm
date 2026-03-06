@@ -1,46 +1,52 @@
-# 안전 영역 
-# BFS
-# N 이상을 1로, N 이하를 0으로 생각 
-# 연결요소의 !최대! 개수 
-
-from collections import deque
+from collections import deque 
+import sys 
+input = sys.stdin.readline 
 
 N = int(input())
-board = [list(map(int, input().split())) for _ in range(N)]
+boards = [list(map(int, input().split())) for _ in range(N)]
+
+max_height = 0
+min_height = 101 
+
+for row in boards:
+    max_height = max(max(row), max_height)
+    min_height = min(min(row), min_height)
 
 dy = (0, 1, 0, -1)
 dx = (1, 0, -1, 0)
 
-def is_valid_coord(x, y):
-    return 0 <= x < N and 0 <= y < N
+def is_valid_coord(y, x):
+    return 0 <= y < N and 0 <= x < N 
 
-def bfs(x, y):
+res = [1]
+
+def bfs(y, x, h):
+    chk[y][x] = True 
     dq = deque()
-    dq.append((x, y))
+    dq.append((y,x))
     
-    while dq:
-        x, y = dq.popleft()
+    while dq: 
+        y, x = dq.popleft()
         
         for k in range(4):
-            nx = x + dx[k]
             ny = y + dy[k]
+            nx = x + dx[k]
             
-            if is_valid_coord(nx, ny) and not chk[nx][ny] and board[nx][ny] > height:
-                chk[nx][ny] = True 
-                dq.append((nx, ny))
+            if is_valid_coord(ny, nx) and not chk[ny][nx] and boards[ny][nx] > h:
+                chk[ny][nx] = True 
+                dq.append((ny, nx))
 
-res = 1 # 최댓값으로 업데이트
+ans = 1 
 
-for height in range(1, 101): # N: 1~N까지 높이
-    ans = 0 # 연결요소의 개수
-    chk = [[False] * (N) for _ in range(N)]
-    
-    for i in range(N):
-        for j in range(N):
-            if not chk[i][j] and board[i][j] > height:
+for h in range(min_height, max_height+1): 
+    ans = 0 
+    chk = [[False] * N for _ in range(N)]
+    for y in range(N):
+        for x in range(N):
+            if not chk[y][x] and boards[y][x] > h:
                 ans += 1 
-                bfs(i, j) # x, y
-    
-    res = max(res, ans)
+                bfs(y, x, h)
+    res.append(ans)
 
-print(res)
+print(max(res))
+
