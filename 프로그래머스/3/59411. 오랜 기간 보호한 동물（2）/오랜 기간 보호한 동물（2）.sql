@@ -1,5 +1,4 @@
--- 코드를 입력하세요
-SELECT ins.ANIMAL_ID as ANIMAL_ID, ins.NAME as NAME
-from ANIMAL_INS as ins inner join ANIMAL_OUTS as outs on ins.ANIMAL_ID = outs.ANIMAL_ID
-order by timestampdiff(day, ins.DATETIME, outs.DATETIME) desc 
+select ins.animal_id, ins.name
+from animal_ins as ins join animal_outs as outs on ins.animal_id = outs.animal_id
+order by (outs.datetime - ins.datetime) desc
 limit 2;
