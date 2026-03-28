@@ -7,6 +7,10 @@ str = list(input().rstrip())
 ans = ''
 isFound = False 
 
+if 'A' not in str:
+    print('NO')
+    exit()
+
 for c in combinations(str, M):
     if c[-1] not in ['A', 'E', 'I', 'O', 'U'] and c[M-2] == 'A' and c[M-3] == 'A':
         isFound = True 
