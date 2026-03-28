@@ -3,7 +3,7 @@
 # 자연수 N의 최댓값
 
 S = int(input())
-rest = S # S - 2i 의 잔여값 
+rest = S 
 ans = 0
 
 for i in range(1, S+1):
