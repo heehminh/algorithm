@@ -1,47 +1,48 @@
-# 주차장
-from collections import deque
+from collections import deque 
+import sys 
+input = sys.stdin.readline 
 
 N, M = map(int, input().split())
+cost = [int(input()) for _ in range(N)]
+weight = [int(input()) for _ in range(M)]
 
-costs = [int(input()) for _ in range(N)]
-weights = [int(input()) for _ in range(M)]
+dq = deque()
+spaces = [0] * N
 
-cars = [int(input()) for _ in range(2 * M)]
+ans = 0
 
-ans = 0 # 총 요금
-
-space = [0 for _ in range(N)] # 주차 공간 초기화 (0은 빈 공간)
-dq = deque() # 대기 큐
-
-for num in cars:
-    if num > 0: # 입차
-        dq.append(num) # 대기 큐에 차량 추가
+for i in range(2*M):
+    num = int(input())
+    
+    if num > 0: # 입차 
+        dq.append(num)
         
-        while dq:
-            if 0 in space: # 빈 공간이 있을 때
-                w = dq.popleft() # 가장 오래 대기한 차량 꺼내기
+        while dq: 
+            if 0 in spaces:
+                w = dq.popleft()
                 
-                for idx, spot in enumerate(space):
-                    if spot == 0:
-                        space[idx] = w # 차량 주차
-                        ans += weights[w - 1] * costs[idx] # 요금 계산
-                        break
+                for k, v in enumerate(spaces):
+                    if v == 0:
+                        spaces[k] = w 
+                        ans += weight[w-1] * cost[k]
+                        break 
+            
             else:
-                break # 빈 공간이 없으면 대기
+                break 
     
     else: # 출차
-        out_car = abs(num)
-        for idx, spot in enumerate(space):
-            if spot == out_car:
-                space[idx] = 0 # 차량 출차 후 공간 비우기
-                break
+        car = -(num)
+        for k, v in enumerate(spaces):
+            if v == car:
+                spaces[k] = 0
+                break 
         
-        if dq: # 대기 중인 차량이 있을 때
-            w = dq.popleft() # 대기 중인 차량 꺼내기
-            for idx, spot in enumerate(space):
-                if spot == 0:
-                    space[idx] = w # 차량 주차
-                    ans += weights[w - 1] * costs[idx] # 요금 계산
+        if dq:
+            w = dq.popleft()
+            for k, v in enumerate(spaces):
+                if v == 0:
+                    spaces[k] = w 
+                    ans += weight[w-1] * cost[k]
                     break
 
 print(ans)
