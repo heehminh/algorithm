@@ -17,16 +17,13 @@ def solution(plans):
     q = deque()
     
     while idx < len(plans):
-        if len(answer) == len(plans):
-            return answer 
-        
         name, start_time, playtime = plans[idx]
         
         start_time_list = list(map(int, start_time.split(":")))
         start = start_time_list[0]*60 + start_time_list[1] 
         end = start + int(playtime)
         
-        before_n, before_s, before_e = now 
+        before_n, _, before_e = now 
         now = [name, start, end]
 
         if before_e <= start:
@@ -49,7 +46,7 @@ def solution(plans):
         idx += 1 
     
     # 마지막 과제 처리 
-    before_n, before_s, before_e = now 
+    before_n, _, _ = now 
     answer.append(before_n)
     
     while q:
