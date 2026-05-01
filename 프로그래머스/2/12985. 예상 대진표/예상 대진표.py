@@ -14,7 +14,7 @@ def solution(n,a,b):
         num *= 2 
     
     for i in range(len(dp)):  
-        round = dp[i][0]
+        r = dp[i][0]
         for num_list in dp[i][1:]:
             if a in num_list and b in num_list:
-                return round 
+                return r 
