@@ -1,10 +1,10 @@
 # [level 1] 모의고사 - 42840 
 
-[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/42840) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/42840?gad_source=1&gad_campaignid=23716289893&gbraid=0AAAAAC_c4nDFHwdrcrgcutUR-NzN8bHK2&gclid=Cj0KCQjwh-HPBhCIARIsAC0p3cfNgzttjSWrFj6NJ_p7mNrIueG8W3s-dyCBDUzV3rAkK0la1ippAK4aAufyEALw_wcB) 
 
 ### 성능 요약
 
-메모리: 9.4 MB, 시간: 3.24 ms
+메모리: 9.21 MB, 시간: 6.35 ms
 
 ### 구분
 
@@ -16,7 +16,7 @@
 
 ### 제출 일자
 
-2025년 07월 24일 19:35:17
+2026년 05월 05일 02:45:06
 
 ### 문제 설명
 
