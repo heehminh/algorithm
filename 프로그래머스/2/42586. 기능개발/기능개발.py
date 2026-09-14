@@ -1,24 +1,23 @@
+import math
 def solution(progresses, speeds):
-    import math
-    
+    days = []
     answer = []
     
-    end_days = []
+    # 완성까지 며칠 걸리는지 계산 
     for i in range(len(progresses)):
-        day = math.ceil((100 - progresses[i]) / speeds[i]) # 각 작업이 언제 끝나는지 
-        end_days.append(day)
+        days.append(math.ceil((100 - progresses[i])/speeds[i]))
     
-    cnt = 1 
-    before_day = end_days[0]
+    b = days[0]
+    num = 1 
     
-    for i in range(1, len(end_days)):
-        if end_days[i] <= before_day:
-            cnt += 1 
+    for i in range(1, len(days)):
+        if b >= days[i]:
+            num += 1 
         else:
-            answer.append(cnt)
-            cnt = 1 
-            before_day = end_days[i]
+            b = days[i]
+            answer.append(num)
+            num = 1
     
-    answer.append(cnt) # 마지막 묶음 추가 
+    answer.append(num)
     
     return answer
