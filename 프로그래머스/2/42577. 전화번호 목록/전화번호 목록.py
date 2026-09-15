@@ -1,11 +1,10 @@
-# 접두어인 경우가 있으면 return false
-
 def solution(phone_book):
-    # 정렬 후, 앞 뒤 같은 아이템이 있다면 answer = False
+    answer = True
     phone_book.sort()
     
-    for idx in range(len(phone_book)):
-        if phone_book[idx-1] == phone_book[idx][:len(phone_book[idx-1])]:
-            return False
-    
-    return True
+    for i in range(len(phone_book)-1):
+        if phone_book[i] == phone_book[i+1][:len(phone_book[i])]:
+            answer = False
+            break
+            
+    return answer
