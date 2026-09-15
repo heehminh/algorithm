@@ -1,14 +1,14 @@
 def solution(clothes):
-    f_dict = {}
     answer = 1
+    c_dict = {}
     
-    for name, type in clothes:
-        if type in f_dict.keys():
-            f_dict[type] += 1 
-        else:
-            f_dict[type] = 1 
+    for _, k in clothes:
+        if k in c_dict:
+            c_dict[k] += 1 
+        else: 
+            c_dict[k] = 1 
     
-    for _, v in f_dict.items():
-        answer *= v+1 
+    for v in c_dict.values():
+        answer *= (v+1)
     
     return answer-1
