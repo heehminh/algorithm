@@ -1,10 +1,10 @@
 # [level 2] 더 맵게 - 42626 
 
-[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/42626) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/42626?gad_source=1&gad_campaignid=22356298761&gbraid=0AAAAAC_c4nD863FNs4LTRm5nzHmAPP-cj&gclid=CjwKCAjw_KjVBhAHEiwAnC0N9JEp0P2DZNJ7vb4XnXRJfdXIEKikxz8tzcPsJUlggtZtpIxPlWJH0hoCC-IQAvD_BwE) 
 
 ### 성능 요약
 
-메모리: 50.5 MB, 시간: 1149.23 ms
+메모리: 52.8 MB, 시간: 1696.22 ms
 
 ### 구분
 
@@ -16,7 +16,7 @@
 
 ### 제출 일자
 
-2026년 05월 12일 19:02:33
+2026년 09월 16일 20:18:59
 
 ### 문제 설명
 
