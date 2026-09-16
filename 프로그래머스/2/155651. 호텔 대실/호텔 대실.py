@@ -1,31 +1,22 @@
-import heapq 
+import heapq
 
 def solution(book_time):
-    book_time.sort(key=lambda x: x[0])
+    answer = []
     
-    s, e = book_time[0]
-    
-    b_s = int(s.split(":")[0]) * 60 + int(s.split(":")[1])
-    b_e = int(e.split(":")[0]) * 60 + int(e.split(":")[1])
-    
-    rooms = [b_e]
-    heapq.heapify(rooms)
-    
-    for idx in range(1, len(book_time)):
-        s, e = book_time[idx]
-        start = int(s.split(":")[0]) * 60 + int(s.split(":")[1])
-        end = int(e.split(":")[0]) * 60 + int(e.split(":")[1])
+    mList = []
+    for s, e in book_time:
+        sh, sm = s.split(":")
+        eh, em = e.split(":")
         
-        if rooms:
-            before_end = heapq.heappop(rooms)
-            
-            if start >= before_end + 10:
-                heapq.heappush(rooms, end)
-            else:
-                heapq.heappush(rooms, before_end)
-                heapq.heappush(rooms, end)
-            
-        else:
-            heapq.heappush(rooms, end)
+        mList.append([int(sh)*60 + int(sm), int(eh)*60 + int(em)])
     
-    return len(rooms)
+    mList.sort()
+    
+    h = []
+    for s, e in mList:
+        if h and h[0] <= s:
+            heapq.heappop(h)
+        
+        heapq.heappush(h, e+10)
+    
+    return len(h)
