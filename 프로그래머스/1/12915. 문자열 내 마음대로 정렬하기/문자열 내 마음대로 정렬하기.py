@@ -1,13 +1,16 @@
 def solution(strings, n):
     answer = []
-    idx_n_list = []
+    wList = []
     
     for idx in range(len(strings)):
-        idx_n_list.append([strings[idx][n], idx])
+        tmp = []
+        tmp.append(strings[idx])
+        tmp.append(list(strings[idx]))
+        wList.append(tmp)
     
-    idx_n_list.sort(key=lambda x: (x[0], strings[x[1]]))
+    wList.sort(key=lambda x: (x[1][n], x[0]))
     
-    for s, idx in idx_n_list:
-        answer.append(strings[idx])
+    for w in wList:
+        answer.append(w[0])
     
     return answer
