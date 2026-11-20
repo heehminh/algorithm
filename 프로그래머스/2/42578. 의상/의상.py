@@ -1,14 +1,14 @@
 def solution(clothes):
     answer = 1
-    c_dict = {}
+    cd = {}
     
-    for _, k in clothes:
-        if k in c_dict:
-            c_dict[k] += 1 
-        else: 
-            c_dict[k] = 1 
+    for cn, ct in clothes:
+        if ct in cd: 
+            cd[ct] += 1 
+        else:
+            cd[ct] = 1 
     
-    for v in c_dict.values():
-        answer *= (v+1)
+    for t, n in cd.items():
+        answer *= (n+1)
     
-    return answer-1
+    return answer - 1 
