@@ -3,21 +3,32 @@ from itertools import combinations
 def solution(orders, course):
     answer = []
     
-    for n in course:
-        o_dict = {}
-        for o in orders:
-            for combi in combinations(o, n):
-                key = ''.join(list(sorted(combi)))
-                
-                if key in o_dict:
-                    o_dict[key] += 1 
-                else:
-                    o_dict[key] = 1 
+    for cnt in course:
+        cd = {}
         
-        if o_dict:
-            max_num = max(max(o_dict.values()), 2)
-            for k, v in o_dict.items():
-                if v == max_num:
-                    answer.append(k)
+        for o in orders: 
+            for combi in combinations(list(o), cnt):
+                cc = "".join(sorted(combi))
+                
+                if cc in cd:
+                    cd[cc] += 1 
+                else:
+                    cd[cc] = 1 
+        
+        
+        sarr = []
+        for k, v in sorted(cd.items(), reverse=True, key=lambda x: x[1]):
+            s = ''
+            for i in range(cnt):
+                s += k[i]
             
-    return sorted(answer)
+            sarr.append([v, s])
+            max_value = max(sarr[0][0], 2)
+        
+        for v, n in sarr:
+            if v == max_value:  
+                answer.append("".join(sorted(n))) # 넣을때 알파벳 오름차순으로 정렬해서 넣기  
+    
+    answer.sort()
+    
+    return answer
