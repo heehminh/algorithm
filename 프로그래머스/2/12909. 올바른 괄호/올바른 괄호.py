@@ -1,18 +1,19 @@
 def solution(s):
     answer = True
-    s_ = list(s)
+    
     stk = []
     
-    for item in s_:
-        if item == '(':
-            stk.append(item)
-        elif len(stk) == 0 and item == ')':
-            answer = False 
-            break
-        else:
+    for idx in range(len(s)):
+        if s[idx] == '(':
+            stk.append('(')
+        
+        elif s[idx] == ')' and stk:
             stk.pop()
+        
+        else:
+            return False 
     
-    if len(stk) > 0:
-        answer = False 
+    if stk:
+        return False 
 
-    return answer
+    return True
