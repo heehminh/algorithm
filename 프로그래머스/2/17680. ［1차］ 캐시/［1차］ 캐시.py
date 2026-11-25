@@ -1,29 +1,42 @@
+import heapq 
+
 def solution(cacheSize, cities):
     answer = 0
-    
-    dict = {} 
-    cnt = 0 
+    t = 0 
+    h = []
     
     if cacheSize == 0:
         return 5 * len(cities)
     
-    for city in cities:
-        if city.lower() in dict:
-            dict[city.lower()] = cnt 
-            answer += 1 
+    for idx in range(len(cities)):
+        c = cities[idx]
+        c = c.lower()
         
-        elif len(dict) < cacheSize:
-            dict[city.lower()] = cnt 
-            answer += 5 
+        isCached = False 
         
-        else:
-            # 숫자가 젤 작은거 삭제
-            k = min(dict, key=dict.get)
-            del dict[k]
-            dict[city.lower()] = cnt 
-            answer += 5
-
-        cnt += 1 
+        tmp = []
+        for _ in range(len(h)):
+            ot, oc = heapq.heappop(h)
+            tmp.append([ot, oc])
+        
+        for old in tmp:
+            ot, oc = old
             
-    
+            if oc == c:
+                heapq.heappush(h, (idx, c))
+                isCached = True 
+                
+            else:
+                heapq.heappush(h, (ot, oc))
+        
+        if isCached:
+            answer += 1 
+            
+        else:
+            if len(h) >= cacheSize:
+                heapq.heappop(h)
+
+            heapq.heappush(h, (idx, c))
+            answer += 5 
+            
     return answer
