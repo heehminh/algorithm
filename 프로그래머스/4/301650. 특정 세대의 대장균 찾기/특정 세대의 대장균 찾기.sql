@@ -1,7 +1,7 @@
 with recursive ge as (
-    select id, 1 as generation
-    from ecoli_data
-    where parent_id is null 
+    select id, 1 as generation 
+    from ecoli_data 
+    where parent_id is null
     
     union all 
     
@@ -12,3 +12,4 @@ with recursive ge as (
 select e.id 
 from ecoli_data as e join ge on e.id = ge.id 
 where ge.generation = 3 
+order by e.id 
