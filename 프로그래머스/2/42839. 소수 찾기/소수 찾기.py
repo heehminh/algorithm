@@ -1,32 +1,25 @@
 from itertools import permutations 
 
-def is_prime(str):
-    flag = True 
-    num = int(str)
+def isPrime(num):
+    if num == 0 or num == 1:
+        return False 
     
     for i in range(2, num):
         if num % i == 0:
-            return False
-        
-    if flag:
-        return True  
+            return False  
+    
+    return True  
 
 def solution(numbers):
-    answer = 0
+    answer = []
     
-    number_list = list(numbers)
-    prime_set = set()
+    numbers = sorted(list(numbers))
     
-    for num in range(1, len(numbers)+1):
-        for p in permutations(number_list, num):
-            str = ""
-            for string in p:
-                str += string 
-                
-            if int(str) == 0 or int(str) == 1:
-                continue
+    for col in range(1, len(numbers)+1):
+        for per in permutations(numbers, col):
+            num = int("".join(per))
             
-            if is_prime(str):
-                prime_set.add(int(str))
-
-    return len(prime_set)
+            if isPrime(num) and num not in answer:
+                answer.append(num)
+    
+    return len(answer) 
