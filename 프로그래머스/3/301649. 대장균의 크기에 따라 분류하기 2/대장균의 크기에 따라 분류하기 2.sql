@@ -1,10 +1,10 @@
-select id, 
-case when (p/cnt) * 100 <= 25 then 'CRITICAL' 
-when (p/cnt) * 100 <= 50 then 'HIGH' 
-when (p/cnt) * 100 <= 75 then 'MEDIUM' 
-else 'LOW' end as colony_name
+select id,
+case when n = 1 then 'CRITICAL' 
+when n = 2 then 'HIGH'
+when n = 3 then 'MEDIUM'
+else 'LOW' end as colony_name 
 from (
-    select id, rank() over (order by size_of_colony desc) as p
+    select id, ntile(4) over (order by size_of_colony desc) as n 
     from ecoli_data 
-) as r, (select count(*) as cnt from ecoli_data) as c 
+) as tmp 
 order by id 
